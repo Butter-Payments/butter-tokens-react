@@ -34,7 +34,7 @@ const App = () => {
 
   return (
     <ButterForm merchantKey={xxx} onSubmit={handleSubmit}>
-      <MyComponent />
+      <CardElement />
       <button type="submit">
         Submit
       </button>
