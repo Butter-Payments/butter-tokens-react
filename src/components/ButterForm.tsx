@@ -11,11 +11,15 @@ const ButterForm = ({
   onSubmit,
   className,
   style,
+  sourceId,
+  merchantKey,
 }: {
   children: JSX.Element[] | JSX.Element;
-  onSubmit: (event: FormEvent, token: string) => void;
+  onSubmit: (event: FormEvent, paymentMethod: object) => void;
   className?: string;
   style?: React.CSSProperties;
+  sourceId: string;
+  merchantKey: string;
 }) => {
   const { bt } = useBasisTheory("key_us_pub_Uj5ZTXb8q5soT2W7KRVjRB", {
     elements: true,
@@ -26,25 +30,30 @@ const ButterForm = ({
     event.preventDefault();
 
     if (bt && cardData) {
-      console.log(cardData);
-
-      let token;
+      let paymentMethod = {};
       try {
-        token = await bt.tokens.create({
-          type: "card",
-          data: cardData,
+        const response  = await bt.proxy.post({
+          headers: {
+            "BT-PROXY-KEY": merchantKey,
+            "X-BUTTER-SOURCE-ID": sourceId,
+          },
+          body: {
+            type: "card",
+            card: {
+              number: cardData.cardNumber,
+              exp_month: cardData.expirationMonth,
+              exp_year: cardData.expirationYear,
+              cvc: cardData.cvc,
+            },
+          },
         });
-
-        console.log(token);
-
+        paymentMethod = response;
         // TODO: Proxy or send token to butter server
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error(error);
       }
-
-      console.log(event);
-      onSubmit(event, token!.id);
+      onSubmit(event, paymentMethod);
     }
   };
 
