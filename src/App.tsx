@@ -5,7 +5,7 @@ function App() {
 
   return (
     <>
-     <ButterForm onSubmit={(data) => console.log(data)} sourceId="xxx" merchantKey='us_proxy_VupgZzNhCKmCQhgtr5BbGE'>
+     <ButterForm onSubmit={(data) => console.log(data)} sourceId="xxx" merchantKey='xxx'>
       <CardElement />
       <button type="submit">
         Submit
