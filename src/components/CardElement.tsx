@@ -42,22 +42,28 @@ export default function CardElement() {
   };
 
   return (
-    <>
-      <CardNumberElement
-        id="cardNumber"
-        ref={cardNumberRef}
-        onChange={handleCardNumberChange}
-      />
-      <CardExpirationDateElement
-        id="cardExpirationDate"
-        ref={cardExpirationDateRef}
-        onChange={handleCardExpirationDateChange}
-      />
-      <CardVerificationCodeElement
-        id="cardVerificationCode"
-        ref={cardVerificationCodeRef}
-        onChange={handleCardVerficationCodeChange}
-      />
-    </>
+    <div style={{display: 'flex'}}>
+      <div style={{flexGrow: 1, minWidth: '200px'}}>
+        <CardNumberElement
+          id="cardNumber"
+          ref={cardNumberRef}
+          onChange={handleCardNumberChange}
+        />
+      </div>
+      <div style={{width: '80px'}}>
+        <CardExpirationDateElement
+          id="cardExpirationDate"
+          ref={cardExpirationDateRef}
+          onChange={handleCardExpirationDateChange}
+        />
+      </div>
+      <div style={{width: '55px'}}>
+        <CardVerificationCodeElement
+          id="cardVerificationCode"
+          ref={cardVerificationCodeRef}
+          onChange={handleCardVerficationCodeChange}
+        />
+      </div>
+    </div>
   );
 }

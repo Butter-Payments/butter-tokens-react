@@ -20,10 +20,17 @@ yarn add @butter-payments/butter-vaulting-react
 ## Usage
 Simply use the ButterForm component and the CardElement component to get your Stripe payment method. You will be able to grab the Stripe payment method from the onSubmit hook.
 
+
 ### ButterForm
-**Props**
-- merchantKey (string, required: The merchant key provided by Butter
-- sourceId (string, required): The sourceId provided by Butter
+#### Properties
+
+|Property|Required|Type|Description|
+|-|-|-|-|-|-|-|
+|merchantKey|true|string| The merchant key provided by Butter|
+|sourceId|true|string|The sourceId provided by Butter|
+|style|false|object|React style object for inline styling|
+|className|false|string|Classnames to be passed onto the form 
+
 Requires a button component with type submit to trigger the form submission.
 
 
