@@ -25,11 +25,11 @@ Simply use the ButterForm component and the CardElement component to get your St
 #### Properties
 
 |Property|Required|Type|Description|
-|-|-|-|-|-|-|-|
+|--------|--------|----|------------|
 |merchantKey|true|string| The merchant key provided by Butter|
 |sourceId|true|string|The sourceId provided by Butter|
 |style|false|object|React style object for inline styling|
-|className|false|string|Classnames to be passed onto the form 
+|className|false|string|Classnames to be passed onto the form|
 
 Requires a button component with type submit to trigger the form submission.
 
