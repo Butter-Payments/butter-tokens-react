@@ -15,7 +15,10 @@ const ButterForm = ({
   merchantKey,
 }: {
   children: JSX.Element[] | JSX.Element;
-  onSubmit: (event: FormEvent, paymentMethod: object) => void;
+  onSubmit: (
+    event: FormEvent | unknown,
+    paymentMethod: object | unknown
+  ) => void;
   className?: string;
   style?: React.CSSProperties;
   sourceId: string;
@@ -29,15 +32,12 @@ const ButterForm = ({
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
-    if (bt && cardData) {
-      let paymentMethod = {};
+    if (bt && bt.client && cardData) {
+      let paymentMethod;
       try {
-        const response  = await bt.proxy.post({
-          headers: {
-            "BT-PROXY-KEY": merchantKey,
-            "X-BUTTER-SOURCE-ID": sourceId,
-          },
-          body: {
+        const response = await bt.client.post(
+          "https://api.basistheory.com/proxy",
+          {
             type: "card",
             card: {
               number: cardData.cardNumber,
@@ -46,12 +46,18 @@ const ButterForm = ({
               cvc: cardData.cvc,
             },
           },
-        });
+          {
+            headers: {
+              "BT-PROXY-KEY": merchantKey,
+              "X-BUTTER-SOURCE-ID": sourceId,
+              "BT-API-KEY": "key_us_pub_Uj5ZTXb8q5soT2W7KRVjRB",
+            },
+          }
+        );
         paymentMethod = response;
-        // TODO: Proxy or send token to butter server
       } catch (error) {
         // eslint-disable-next-line no-console
-        console.error(error);
+        onSubmit(error, paymentMethod);
       }
       onSubmit(event, paymentMethod);
     }
