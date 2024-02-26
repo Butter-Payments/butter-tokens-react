@@ -8,13 +8,13 @@ A set of React components to integrate Butter Payments vaulting without interrup
 Using [Node Package Manager](https://docs.npmjs.com/)
 
 ```sh
-npm install --save @butter-payments/butter-vaulting-react
+npm install --save @butterpayments/butter-vaulting-react
 ```
 
 Using [Yarn](https://classic.yarnpkg.com/en/docs/)
 
 ```sh
-yarn add @butter-payments/butter-vaulting-react
+yarn add @butterpayments/butter-vaulting-react
 ```
 
 ## Usage
@@ -40,7 +40,7 @@ Requires a button component with type submit to trigger the form submission.
 import {
   ButterForm,
   CardElement,
-} from '@butter-payments/butter-vaulting-react';
+} from '@butterpayments/butter-vaulting-react';
 
 const App = () => {
   const handleSubmit = (event, paymentMethod) => {
