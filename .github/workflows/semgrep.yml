@@ -1,4 +1,3 @@
-
 name: Trigger Semgrep Scan Workflow
 
 on:
@@ -13,16 +12,13 @@ jobs:
   trigger-semgrep:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
       - name: Trigger Semgrep Scan Workflow
         uses: actions/github-script@v6
         with:
           script: |
-            const { data: workflow } = await github.actions.createWorkflowDispatch({
+            await github.rest.actions.createWorkflowDispatch({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              workflow_id: 'security-workflows/.github/workflows/semgrep-sast.yml', 
-              ref: context.ref, 
+              workflow_id: "security-workflows/.github/workflows/semgrep-sast.yml",
+              ref: context.ref.replace('refs/heads/', ''), 
             });
